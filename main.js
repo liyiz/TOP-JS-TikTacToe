@@ -1,19 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Module/IIFE pattern for scoping
-    const Game = (() => {
+    function Game() {
         // Private variables/functions
-        const init = () => { console.log("Hello, World!") }
+        const init = () => { 
+            initGrid(defaultGridSize);
+            console.table(board);
+        }
 
-        const gridsize = 3;
-        const player1 = 'x';
-        const player2 = 'o';
+        const defaultGridSize = 3;
+
+        const playerOne = {
+            marker: 'x'
+        }
+        const playerTwo = {
+            marker: 'o'
+        }
+
         const board = [];
 
-        function initGrid(gridsize) {
+        const initGrid = (gridSize) => {
             // Reset the grid
-            for (let i = 0; i < gridsize; i++) {
+            for (let i = 0; i < gridSize; i++) {
                 board[i] = [];
-                for (let j = 0; j < gridsize; j++) {
+                for (let j = 0; j < gridSize; j++) {
                     board[i].push(Cell());
                 }
             }
@@ -51,9 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
             init,
             initGrid,
             checkWinner,
-            placeToken
+            placeToken,
+            defaultGridSize
         };
-    })();
+    }
   
-    Game.init(); // Start the app
-  });
+    const gameInstance = Game();
+    gameInstance.init(); // Start the app
+});
