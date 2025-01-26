@@ -1,3 +1,18 @@
+:root {
+    --color-background: #121212;
+    --color-modal: 77 77 77; /* #4d4d4d */
+    --color-surface: 18, 18, 18; /* #121212 */
+    --color-error: 207, 102, 121; /* #cf6679 */
+    --color-primary: 187, 134, 252; /* #bb86fc */
+    --color-primary-variant: #3700b3;
+    --color-secondary: #03dac5;
+    --color-on-primary: #000000;
+    --color-on-secondary: #000000;
+    --color-on-background: #ffffff;
+    --color-on-surface: 255, 255, 255;
+    --color-on-error: #000000;
+}
+
 * {
     padding: 0; margin: 0;
     box-sizing: border-box;
