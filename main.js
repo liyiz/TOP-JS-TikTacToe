@@ -23,27 +23,33 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < gridSize; i++) {
                 board[i] = [];
                 for (let j = 0; j < gridSize; j++) {
-                    board[i].push(Cell());
+                    // Send coordinate as string to Cell()
+                    board[i].push(Cell(i.toString() + ', ' + j.toString()));
                 }
             }
         }
 
         // Factory function for handling cells for the game board
-        function Cell() {
+        function Cell(coord) {
 
+            // This variable is not returned, so it is a private variable
+            // It can only be accessed via the public functions returned (addToken and getValue)
             let value = '';
+            // const coord = coordinate;
           
             // Accept a player's token to change the value of the cell
             const addToken = (player) => {
-                value = player;
+                value = player.marker;
             };
           
             // How we will retrieve the current value of this cell through closure
             const getValue = () => value;
+            const getCoord = () => coord;
           
             return {
                 addToken,
-                getValue
+                getValue,
+                getCoord
             };
         }
 
@@ -55,16 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
             // Place either a 'o' or 'x' in the selected grid cell
         }
 
+        const getBoard = () => console.table(board);
+
         return {
             // Public methods (e.g., init)
             init,
             initGrid,
             checkWinner,
             placeToken,
-            defaultGridSize
+            defaultGridSize,
+            getBoard
         };
     }
   
+    // 
     const gameInstance = Game();
+
+    // Temporarily expose for debugging
+    window.gameInstance = gameInstance;
+
     gameInstance.init(); // Start the app
+
+    
 });
