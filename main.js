@@ -8,14 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const defaultGridSize = 3;
-
-        const playerOne = {
-            marker: 'x'
-        }
-        const playerTwo = {
-            marker: 'o'
-        }
-
         const board = [];
 
         const initGrid = (gridSize) => {
@@ -29,6 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        function Player(marker) {
+            const getMarker = () => marker
+            let score = 0
+            const updateScore = (value) {
+                score += value;
+            }
+            const getScore = () => score;
+            return {
+                getMarker, getScore, updateScore
+            }
+        }
+
+        const playerOne = Player('o');
+        const playerTwo = Player('x');
+
         // Factory function for handling cells for the game board
         function Cell(coord) {
 
@@ -39,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
             // Accept a player's token to change the value of the cell
             const addToken = (player) => {
-                value = player.marker;
+                value = player.getMarker();
             };
           
             // How we will retrieve the current value of this cell through closure
@@ -62,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const getBoard = () => console.table(board);
+
+        
 
         return {
             // Public methods (e.g., init)
