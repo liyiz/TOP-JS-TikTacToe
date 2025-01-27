@@ -1,14 +1,27 @@
+// 1. Game displays which grid cells are empty, and which grid cells have markers and whose marker.
+// 2. Game shows whose turn it is
+// 3. That player selects a valid grid cell to place their marker
+// 4. The cell updates its value to the player's marker
+// 5. Game checks if there is a winning state for either player
+// 6. If there is a 3 in a row match, then the marker value is identified, and the win is given to that player.
+
 document.addEventListener('DOMContentLoaded', () => {
     // Module/IIFE pattern for scoping
     function Game() {
         // Private variables/functions
         const init = () => { 
-            initGrid(defaultGridSize);
+            initGrid(defaultGridSize); // Create or reset the game board
+            // setupPlayers(2); // Add 2 players to the game
+            players.push(Player('o'));
+            players.push(Player('x')); // Players are associated with their index in players array
+            console.table(players);
             console.table(board);
+
         }
 
         const defaultGridSize = 3;
         const board = [];
+        const players = [];
 
         const initGrid = (gridSize) => {
             // Reset the grid
@@ -21,20 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // function setupPlayers(playerCount) {
+        //     for (let i = 0; i < playerCount; i++) {
+        //          // code to add as many players as playerCount
+        //     }
+        //     return {
+        //         // players...
+        //     }
+        // }
+
         function Player(marker) {
             const getMarker = () => marker
-            let score = 0
-            const updateScore = (value) => {
-                score += value;
-            }
-            const getScore = () => score;
             return {
-                getMarker, getScore, updateScore
+                getMarker
             }
         }
 
-        const playerOne = Player('o');
-        const playerTwo = Player('x');
+
 
         // Factory function for handling cells for the game board
         function Cell(coord) {
@@ -68,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Place either a 'o' or 'x' in the selected grid cell
         }
 
-        const getBoard = () => console.table(board);
 
-        
+        const getBoard = () => console.table(board);
+    
 
         return {
             // Public methods (e.g., init)
