@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function Player(marker) {
             const getMarker = () => marker
             let score = 0
-            const updateScore = (value) {
+            const updateScore = (value) => {
                 score += value;
             }
             const getScore = () => score;
