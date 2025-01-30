@@ -1,9 +1,7 @@
-// 1. Game displays which grid cells are empty, and which grid cells have markers and whose marker.
-// 2. Game shows whose turn it is
-// 3. That player selects a valid grid cell to place their marker
-// 4. The cell updates its value to the player's marker
-// 5. Game checks if there is a winning state for either player
-// 6. If there is a 3 in a row match, then the marker value is identified, and the win is given to that player.
+// Check the state of the board
+// Check whose turn it is (is it 'X' or 'O'?)
+// Check if there is a winner
+// Wait for input from current player (Select a cell)
 
 document.addEventListener('DOMContentLoaded', () => {
     // Module/IIFE pattern for scoping
@@ -14,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // setupPlayers(2); // Add 2 players to the game
             players.push(Player('o'));
             players.push(Player('x')); // Players are associated with their index in players array
+
+            // May need to do an error catch here to make sure only 1 player's turn is set to on
+            players[0].toggleTurn; // Set first player's turn to on
             console.table(players);
             console.table(board);
 
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const defaultGridSize = 3;
         const board = [];
         const players = [];
+        let turn = 0; // track number of turns passed
 
         const initGrid = (gridSize) => {
             // Reset the grid
@@ -34,23 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // function setupPlayers(playerCount) {
-        //     for (let i = 0; i < playerCount; i++) {
-        //          // code to add as many players as playerCount
-        //     }
-        //     return {
-        //         // players...
-        //     }
-        // }
-
         function Player(marker) {
+            let isTurn = false;
             const getMarker = () => marker
+            const toggleTurn = () => isTurn = !isTurn;
             return {
-                getMarker
+                getMarker,
+                toggleTurn
             }
         }
 
-
+        // Get a player object
+        function getPlayer(playerIndex) {
+            return player[playerIndex];
+        }
 
         // Factory function for handling cells for the game board
         function Cell(coord) {
@@ -85,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        const getBoard = () => console.table(board);
+        const getBoard = () => board;
     
 
         return {
@@ -95,7 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
             checkWinner,
             placeToken,
             defaultGridSize,
-            getBoard
+            getBoard,
+            getPlayer
         };
     }
   
