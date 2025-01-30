@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let value = '';
           
             // Accept a player's token to change the value of the cell
-            const addToken = (player) => {
+            const setValue = (player) => {
                 value = player.getMarker();
             };
           
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const getValue = () => value;
           
             return {
-                addToken,
+                setValue,
                 getValue
             };
         }
