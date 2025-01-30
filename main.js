@@ -9,12 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Private variables/functions
         const init = () => { 
             initGrid(defaultGridSize); // Create or reset the game board
-            // setupPlayers(2); // Add 2 players to the game
-            players.push(Player('o'));
-            players.push(Player('x')); // Players are associated with their index in players array
 
-            // May need to do an error catch here to make sure only 1 player's turn is set to on
-            players[0].toggleTurn; // Set first player's turn to on
+            // Create players
+            players.push(createPlayer('o'));
+            players.push(createPlayer('x'));
+
+            // Set who is going to play first
+            // ...
+
+            // Check if there is a winner
+            checkWinner();
+
+            // Debug stuff
             console.table(players);
             console.table(board);
 
@@ -31,33 +37,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 board[i] = [];
                 for (let j = 0; j < gridSize; j++) {
                     // Send coordinate as string to Cell()
-                    board[i].push(Cell(i.toString() + ', ' + j.toString()));
+                    board[i].push(Cell());
                 }
             }
         }
 
-        function Player(marker) {
-            let isTurn = false;
-            const getMarker = () => marker
-            const toggleTurn = () => isTurn = !isTurn;
+        function createPlayer(marker) {
             return {
-                getMarker,
-                toggleTurn
+                marker: marker
             }
         }
 
         // Get a player object
         function getPlayer(playerIndex) {
-            return player[playerIndex];
+            return players[playerIndex];
         }
 
         // Factory function for handling cells for the game board
-        function Cell(coord) {
+        function Cell() {
 
             // This variable is not returned, so it is a private variable
             // It can only be accessed via the public functions returned (addToken and getValue)
             let value = '';
-            // const coord = coordinate;
           
             // Accept a player's token to change the value of the cell
             const addToken = (player) => {
@@ -66,27 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
           
             // How we will retrieve the current value of this cell through closure
             const getValue = () => value;
-            const getCoord = () => coord;
           
             return {
                 addToken,
-                getValue,
-                getCoord
+                getValue
             };
         }
 
         const checkWinner = () => {
             // Scan the grid for a winning line
+            // [x][x][x]
+            // [o][o][o]
+            // [o][o][o]
         }
 
         const placeToken = (gridcell, player) => {
             // Place either a 'o' or 'x' in the selected grid cell
+            const availableCells = board.filter((row) => row[gridcell].getValue() === null).map(row => row[gridcell]);
         }
-
 
         const getBoard = () => board;
     
-
         return {
             // Public methods (e.g., init)
             init,
@@ -95,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
             placeToken,
             defaultGridSize,
             getBoard,
-            getPlayer
+            getPlayer,
+            players
         };
     }
   
