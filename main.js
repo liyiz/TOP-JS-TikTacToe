@@ -30,11 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.table(players);
             console.table(board);
 
+            startGame();
+
         }
 
         const board = [];
         const players = [];
-        let turn = 0; // track number of turns passed
+        let currentPlayerIndex = 0; // sets first player to be current player
+
+        function nextPlayer() {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+            console.log('Current Player:', players[currentPlayerIndex].getMarker());
+        }
 
         const initGrid = (gridSize) => {
             // Reset the grid
@@ -44,7 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function createPlayer(marker) {
+            function getMarker() {
+                return marker;
+            }
             return {
+                getMarker,
                 marker: marker
             }
         }
@@ -88,6 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const getBoard = () => board;
     
+        const startGame = () => {
+
+        }
+
         return {
             // Public methods (e.g., init)
             init,
@@ -96,7 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
             placeToken,
             getBoard,
             getPlayer,
-            players
+            players,
+            nextPlayer,
+            currentPlayerIndex
         };
     }
   
