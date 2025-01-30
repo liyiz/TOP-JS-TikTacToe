@@ -60,9 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // It can only be accessed via the public functions returned (addToken and getValue)
             let value = '';
           
-            // Accept a player's token to change the value of the cell
-            const setValue = (player) => {
-                value = player.getMarker();
+            const setValue = (newValue) => {
+                value = newValue;
             };
           
             // How we will retrieve the current value of this cell through closure
