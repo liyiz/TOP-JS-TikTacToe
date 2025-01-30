@@ -3,12 +3,18 @@
 // Check if there is a winner
 // Wait for input from current player (Select a cell)
 
+// Representation of 3x3 grid in a one dimensional array
+// This will help identify winning patterns
+            // [0][1][2]
+            // [3][4][5]
+            // [6][7][8]
+
 document.addEventListener('DOMContentLoaded', () => {
     // Module/IIFE pattern for scoping
     function Game() {
         // Private variables/functions
         const init = () => { 
-            initGrid(defaultGridSize); // Create or reset the game board
+            initGrid(9); // Create or reset the game board 3x3
 
             // Create players
             players.push(createPlayer('o'));
@@ -26,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        const defaultGridSize = 3;
         const board = [];
         const players = [];
         let turn = 0; // track number of turns passed
@@ -34,14 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const initGrid = (gridSize) => {
             // Reset the grid
             for (let i = 0; i < gridSize; i++) {
-                board[i] = [];
-                for (let j = 0; j < gridSize; j++) {
-                    // Send coordinate as string to Cell()
-                    // Create empty cell
-                    const initCell = Cell().setValue(null);
-                    // Add cell to board array
-                    board[i].push();
-                }
+                board[i] = [null];
             }
         }
 
@@ -61,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // This variable is not returned, so it is a private variable
             // It can only be accessed via the public functions returned (addToken and getValue)
-            let value = '';
+            let value = null;
           
             const setValue = (newValue) => {
                 value = newValue;
@@ -96,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
             initGrid,
             checkWinner,
             placeToken,
-            defaultGridSize,
             getBoard,
             getPlayer,
             players
