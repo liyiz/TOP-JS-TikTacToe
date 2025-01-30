@@ -37,7 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 board[i] = [];
                 for (let j = 0; j < gridSize; j++) {
                     // Send coordinate as string to Cell()
-                    board[i].push(Cell());
+                    // Create empty cell
+                    const initCell = Cell().setValue(null);
+                    // Add cell to board array
+                    board[i].push();
                 }
             }
         }
