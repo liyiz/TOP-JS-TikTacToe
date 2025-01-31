@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const handleClick = (e) => {
                 const element = e.srcElement
-                console.log(e.srcElement);
                 element.classList.toggle("test");
             }
 
+            // .getElementsByClassName returns an array-like object, not an array
+            // Use Array.from to make it compatible with .forEach
             Array.from(gridCells).forEach((el) => {
                 // Attach click eventlistener to each <div class="cell">
-                el.addEventListener('click', handleClick)
-                // console.log('this exists', el);
+                el.addEventListener('click', handleClick);
             });
         }
 
