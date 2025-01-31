@@ -48,3 +48,7 @@ ul {
     border: 1px solid var(--color-secondary);
     cursor: pointer;
 }
+
+.cell.test {
+    background-color: var(--color-primary-variant);
+}

@@ -27,7 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
             players.push(createPlayer('o'));
 
             // Set who is going to play first
-            // ...
+            // No need, first player is already set by first in array
+            // We do have a function to progress player order -> nextPlayer();
+
+            // Wait for input events of current player to select available grid cell
+            // Need eventlistener for placeToken();
+            initEvents();
 
             // Check if there is a winner
             checkWinner();
@@ -43,6 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
         function nextPlayer() {
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
             console.log('Current Player:', players[currentPlayerIndex].getMarker());
+        }
+
+        
+        function initEvents() {
+            const gridCells = document.getElementsByClassName('cell');
+
+            const handleClick = (e) => {
+                const element = e.srcElement
+                console.log(e.srcElement);
+                element.classList.toggle("test");
+            }
+
+            Array.from(gridCells).forEach((el) => {
+                // Attach click eventlistener to each <div class="cell">
+                el.addEventListener('click', handleClick)
+                // console.log('this exists', el);
+            });
         }
 
         const initGrid = (gridSize) => {
