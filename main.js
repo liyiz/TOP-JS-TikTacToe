@@ -56,11 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const handleClick = (e) => {
                 
-                const element = e.srcElement
+                const element = e.target
+                // const elementIndex = Array.from(e.target.parentNode.children).indexOf(child);
+                const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
+                console.log(elementIndex);
                 
                 element.classList.toggle("test"); // debug, cell filled in when clicked
 
-                // Call function that checks if grid cell has a player marker or not
+                // Check if grid cell has a player marker or not
+                
             }
 
             // .getElementsByClassName returns an array-like object, not an array
