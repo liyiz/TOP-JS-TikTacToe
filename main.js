@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const handleClick = (e) => {
                 
                 const element = e.target
-                // const elementIndex = Array.from(e.target.parentNode.children).indexOf(child);
+                // element is the child -> Array.from(child.parentNode.children).indexOf(child);
                 const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
                 console.log(elementIndex);
                 
