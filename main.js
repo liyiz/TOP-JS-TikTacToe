@@ -90,6 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // [x][x][x]
             // [o][o][o]
             // [o][o][o]
+            // 8 combinations
+            // [0, 1, 2] -> [x, x, x, o, o, o, o, o, o]
+            // [3, 4, 5] -> [o, o, o, x, x, x, o, o, o]
+            // [6, 7, 8] -> [o, o, o, o, o, o, x, x, x]
+            // [0, 3, 6] -> [x, o, o, x, o, o, x, o, o]
+            // [1, 4, 7] -> [o, x, o, o, x, o, o, x, o]
+            // [2, 5, 8] -> [o, o, x, o, o, x, o, o, x]
+            // [0, 4, 8] -> [x, o, o, o, x, o, o, o, x]
+            // [2, 4, 6] -> [o, o, x, o, x, o, x, o, o]
+
+            // [0][1][2]
+            // [3][4][5]
+            // [6][7][8]
         }
 
         const placeToken = (gridcell, player) => {
