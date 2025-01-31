@@ -12,13 +12,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Module/IIFE pattern for scoping
     function Game() {
+
         // Private variables/functions
+        const board = [];
+        const players = [];
+        let currentPlayerIndex = 0; // sets first player to be current player
+
+
         const init = () => { 
             initGrid(9); // Create or reset the game board 3x3
 
             // Create players
+            players.push(createPlayer('x')); // will be first player
             players.push(createPlayer('o'));
-            players.push(createPlayer('x'));
 
             // Set who is going to play first
             // ...
@@ -33,10 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
             startGame();
 
         }
-
-        const board = [];
-        const players = [];
-        let currentPlayerIndex = 0; // sets first player to be current player
 
         function nextPlayer() {
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
