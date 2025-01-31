@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // We do have a function to progress player order -> nextPlayer();
 
             // Wait for input events of current player to select available grid cell
-            // Need eventlistener for placeToken();
+            // Need eventlistener for placeMarker();
             initEvents();
 
             // Check if there is a winner
@@ -55,8 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const gridCells = document.getElementsByClassName('cell');
 
             const handleClick = (e) => {
+                
                 const element = e.srcElement
-                element.classList.toggle("test");
+                
+                element.classList.toggle("test"); // debug, cell filled in when clicked
+
+                // Call function that checks if grid cell has a player marker or not
             }
 
             // .getElementsByClassName returns an array-like object, not an array
@@ -129,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // [6][7][8]
         }
 
-        const placeToken = (gridcell, player) => {
+        const placeMarker = (gridcell, player) => {
             // Place either a 'o' or 'x' in the selected grid cell
             const availableCells = board.filter((row) => row[gridcell].getValue() === null).map(row => row[gridcell]);
         }
@@ -145,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             init,
             initGrid,
             checkWinner,
-            placeToken,
+            placeMarker,
             getBoard,
             getPlayer,
             players,
