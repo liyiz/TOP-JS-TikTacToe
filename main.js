@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Wait for input events of current player to select available grid cell
             // Need eventlistener for placeMarker();
-            initEvents();
+            // initEvents(); // Comment out for now so this can be put into a specific render function
 
             // Check if there is a winner
             checkWinner();
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Current Player:', players[currentPlayerIndex].getMarker());
         }
 
-        
+
         function initEvents() {
             const gridCells = document.getElementsByClassName('cell');
 
@@ -59,8 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const element = e.target
                 // element is the child -> Array.from(child.parentNode.children).indexOf(child);
                 const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
-                console.log(elementIndex);
-                
+                // use elementIndex to reference the game board array
+                console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
+                // I'm worried that elementIndex and board array indexes aren't coupled here. 
+                // Could it be possible for these to ever get out of sync? Maybe not in this context...
                 element.classList.toggle("test"); // debug, cell filled in when clicked
 
                 // Check if grid cell has a player marker or not
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const initGrid = (gridSize) => {
             // Reset the grid
             for (let i = 0; i < gridSize; i++) {
-                board[i] = [null];
+                board[i] = null;
             }
         }
 
