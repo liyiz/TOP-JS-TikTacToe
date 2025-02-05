@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             initGrid(9); // Create or reset the game board 3x3
 
             // Create players
-            players.push(createPlayer('x')); // will be first player
-            players.push(createPlayer('o'));
+            players.push(CreatePlayer('x')); // will be first player
+            players.push(CreatePlayer('o'));
 
             // Set who is going to play first
             // No need, first player is already set by first in array
@@ -84,13 +84,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        function createPlayer(marker) {
+        function CreatePlayer(marker) {
+
+            const selectedPlayer = players[player];
+            let cells = [];
+            const getState = () => {
+                // loop through board state and log indexes that match player marker
+            }
             function getMarker() {
                 return marker;
             }
+
             return {
                 getMarker,
-                marker: marker
+                marker: marker,
+                cells
+
             }
         }
 
@@ -117,6 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 setValue,
                 getValue
             };
+        }
+
+        // Check what cells player one occupies
+        // This can probably go in createPlayer
+        function PlayerState (player) {
+
         }
 
         const checkWinner = () => {
@@ -152,15 +167,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 1. Get current board state
             const gameState = getBoard();
+            
 
-            // console.log(winningStates, gameState);
+
+
+            //      Check what cells player two occupies
 
             // 2. Compare current board state with array of winning combination states
-            //    Check array methods that can search and compare
-
+            //      Check array methods that can search and compare
+            // winningStates.forEach()
 
             // 3. Declare a winner
-            //    Then go off to reset game state
+            //      Then go off to reset game state
             // 4. If no winner, return from function
         }
 
