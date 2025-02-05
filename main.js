@@ -140,14 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // deal with an input from player
-        // usage: gameInstance.placeMarker(players[0], 2);
+        // usage: gameInstance.placeMarker( players_index, cell_grid);
         const placeMarker = (player, cellIndex) => {
             // Place either a 'o' or 'x' in the selected grid cell
             // const availableCells = board.filter((row) => row[gridcell].getValue() === null).map(row => row[gridcell]);
             // console.log(cellIndex);
             // assign gridcell with player marker
             // gridcell = player.marker; // wrong way to do it!
-            board.splice(cellIndex, 1, player.marker);
+            board.splice(cellIndex, 1, players[player].marker);
             return board;
             
         }
@@ -173,12 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
     // 
-    const gameInstance = Game();
+    const game = Game();
 
     // Temporarily expose for debugging
-    window.gameInstance = gameInstance;
+    window.game = game;
 
-    gameInstance.init(); // Start the app
+    game.init(); // Start the app
 
     
 });
