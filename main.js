@@ -137,6 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // [0][1][2]
             // [3][4][5]
             // [6][7][8]
+
+            // 1. Get current board state
+            // 2. Compare current board state with array of winning combination states
+            //    Check array methods that can search and compare
+            // 3. Declare a winner
+            //    Then go off to reset game state
+            // 4. If no winner, return from function
         }
 
         // deal with an input from player
