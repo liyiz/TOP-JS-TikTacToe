@@ -138,9 +138,25 @@ document.addEventListener('DOMContentLoaded', () => {
             // [3][4][5]
             // [6][7][8]
 
+            // 0. Define winning states
+            const winningStates = [
+                [0, 1, 2], // [x, x, x, o, o, o, o, o, o]
+                [3, 4, 5], // [o, o, o, x, x, x, o, o, o]
+                [6, 7, 8], // [o, o, o, o, o, o, x, x, x]
+                [0, 3, 6], // [x, o, o, x, o, o, x, o, o]
+                [1, 4, 7], // [o, x, o, o, x, o, o, x, o]
+                [2, 5, 8], // [o, o, x, o, o, x, o, o, x]
+                [0, 4, 8], // [x, o, o, o, x, o, o, o, x]
+                [2, 4, 6] // [o, o, x, o, x, o, x, o, o]
+            ]
+            
             // 1. Get current board state
+            const gameState = getBoard();
+
             // 2. Compare current board state with array of winning combination states
             //    Check array methods that can search and compare
+
+
             // 3. Declare a winner
             //    Then go off to reset game state
             // 4. If no winner, return from function
