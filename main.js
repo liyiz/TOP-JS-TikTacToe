@@ -147,11 +147,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 [1, 4, 7], // [o, x, o, o, x, o, o, x, o]
                 [2, 5, 8], // [o, o, x, o, o, x, o, o, x]
                 [0, 4, 8], // [x, o, o, o, x, o, o, o, x]
-                [2, 4, 6] // [o, o, x, o, x, o, x, o, o]
+                [2, 4, 6]  // [o, o, x, o, x, o, x, o, o]
             ]
-            
+
             // 1. Get current board state
             const gameState = getBoard();
+
+            // console.log(winningStates, gameState);
 
             // 2. Compare current board state with array of winning combination states
             //    Check array methods that can search and compare
