@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function CreatePlayer(marker) {
 
-            const selectedPlayer = players[player];
             let cells = [];
             const getState = () => {
                 // loop through board state and log indexes that match player marker
@@ -98,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return {
                 getMarker,
                 marker: marker,
-                cells
+                getState
 
             }
         }
