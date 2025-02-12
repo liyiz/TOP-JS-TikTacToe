@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Need eventlistener for placeMarker();
             // initEvents(); // Comment out for now so this can be put into a specific render function
 
-            // Check if there is a winner
-            checkWinner();
+            
 
             // Debug stuff
             console.table(players);
@@ -134,6 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const checkWinner = () => {
+
+            console.log("Just tried to check for a winner.")
+
             // Scan the grid for a winning line
             // [x][x][x]
             // [o][o][o]
@@ -167,9 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Get current board state
             const gameState = getBoard();
             
-
-
-
             //      Check what cells player two occupies
 
             // 2. Compare current board state with array of winning combination states
@@ -190,7 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // assign gridcell with player marker
             // gridcell = player.marker; // wrong way to do it!
             board.splice(cellIndex, 1, players[player].marker);
-            return board;
+
+            // Check if there is a winner after player made their play
+            checkWinner();
+
+            return getBoard();
             
         }
 
