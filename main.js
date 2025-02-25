@@ -132,7 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        const checkWinner = () => {
+        const checkWinner = (player) => {
+            // player parameter is passed in from placeMarker() and is so we can check which 'x' or 'o' player has just made a move.
+
+            const pMarker = players[player].marker;
 
             console.log("Just tried to check for a winner.")
 
@@ -174,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Which player to check is currently hardcoded for 'x'
             let occupiedCells = gameState.map((item, index) => {
-                if (item === 'x') return index;
+                if (item === pMarker) return index;
             }).filter( item => {
                 if (item != undefined) return true;
             });
@@ -189,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             // 3. Declare a winner
-            function checkWinner(win) {
+            function checkWin(win) {
                 if (win) {
                     return true;
                 } 
@@ -204,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
-            console.log(checkWinner(results));
+            console.log(checkWin(results));
 
 
             //      Then go off to reset game state
@@ -222,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             board.splice(cellIndex, 1, players[player].marker);
 
             // Check if there is a winner after player made their play
-            checkWinner();
+            checkWinner(player);
 
             return getBoard();
             
