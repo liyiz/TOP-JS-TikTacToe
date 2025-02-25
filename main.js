@@ -193,17 +193,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 3. Declare a winner
             function checkWin(win) {
+
+                const hasNull = gameState.includes(null);
+
                 if (win) {
                     return true;
                 } 
-                // else if (gameState.length >= 9) { 
-                //     // Issue: the length will always be 9, so I need to check the 9 indexes are occupied - need to express this in a way that fits in this context
-                //     // If there is no winner, we need to check if all cells are occupied
-                //     console.log("All grid cells occupied. Game over!");
-                // } 
-                else {
+                
+                if (hasNull) { 
                     // continue the game
-                    return false;
+                    return "There are still moves to make, continue the game.";
+                } else {
+                    // If there is no winner, we need to check if all cells are occupied
+                    return "All grid cells occupied. Game over!";
                 }
             }
             
