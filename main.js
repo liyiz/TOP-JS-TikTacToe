@@ -169,13 +169,44 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Get current board state
             const gameState = getBoard();
             
-            //      Check what cells player two occupies
 
             // 2. Compare current board state with array of winning combination states
-            //      Check array methods that can search and compare
-            // winningStates.forEach()
+
+            // Which player to check is currently hardcoded for 'x'
+            let occupiedCells = gameState.map((item, index) => {
+                if (item === 'x') return index;
+            }).filter( item => {
+                if (item != undefined) return true;
+            });
+
+            console.log('Player has markers in:', occupiedCells);
+
+            
+            // 2b. Search winningStates and check each of its arrays' array elements against the occupiedCells array elements
+            const results = winningStates.find(element => element.every(item => occupiedCells.includes(item)));
+
+            console.log('The winning result is', results);
+
 
             // 3. Declare a winner
+            function checkWinner(win) {
+                if (win) {
+                    return true;
+                } 
+                // else if (gameState.length >= 9) { 
+                //     // Issue: the length will always be 9, so I need to check the 9 indexes are occupied - need to express this in a way that fits in this context
+                //     // If there is no winner, we need to check if all cells are occupied
+                //     console.log("All grid cells occupied. Game over!");
+                // } 
+                else {
+                    // continue the game
+                    return false;
+                }
+            }
+            
+            console.log(checkWinner(results));
+
+
             //      Then go off to reset game state
             // 4. If no winner, return from function
         }
