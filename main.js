@@ -16,10 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Private variables/functions
         const board = [];
         const players = [];
-        let currentPlayerIndex = 0; 
+        let currentPlayerIndex = 0;
 
         const init = () => { 
             initGrid(9); // Create or reset the game board 3x3
+
+            players.length = 0; // Removes existing players if any
+            currentPlayerIndex = 0;
 
             // Create players
             players.push(CreatePlayer('x')); // will be first player
@@ -244,6 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`The game has ended in a draw`);
             }
             // Code for resetting the game to start anew.
+            console.log("Add in an input here, but running game reset automatically for now");
+            init(); // reset the game
         }
 
         return {
