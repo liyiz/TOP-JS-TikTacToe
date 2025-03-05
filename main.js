@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Private variables/functions
         const board = [];
         const players = [];
-        let currentPlayerIndex = 0; // sets first player to be current player
-
+        let currentPlayerIndex = 0; 
 
         const init = () => { 
             initGrid(9); // Create or reset the game board 3x3
@@ -49,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Current Player:', players[currentPlayerIndex].getMarker());
         }
 
+        // move this code to another large function handling the "visuals" only
         function initEvents() {
             const gridCells = document.getElementsByClassName('cell');
 
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Visuals related
         const initGrid = (gridSize) => {
             // Reset the grid
             for (let i = 0; i < gridSize; i++) {
@@ -169,13 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
 
             // 1. Get current board state
-            const gameState = getBoard();
-            
+            let gameState = {};
+            gameState.board = getBoard();
 
             // 2. Compare current board state with array of winning combination states
 
             // Which player to check is currently hardcoded for 'x'
-            let occupiedCells = gameState.map((item, index) => {
+            let occupiedCells = gameState.board.map((item, index) => {
                 if (item === pMarker) return index;
             }).filter( item => {
                 if (item != undefined) return true;
@@ -186,31 +187,31 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 2b. Search winningStates and check each of its arrays' array elements against the occupiedCells array elements
             const results = winningStates.find(element => element.every(item => occupiedCells.includes(item)));
-            !results ? console.log('There are no winning results.') : console.log('The winning result is', results);
+            // !results ? console.log('There are no winning results.') : console.log('The winning result is', results);
+
 
             // 3. Declare a winner
-            function checkWin(win) {
-
-                const hasNull = gameState.includes(null);
-
-                if (win) {
-                    return true;
-                } 
-                
-                if (hasNull) { 
-                    // continue the game
-                    return "There are still moves to make, continue the game.";
-                } else {
-                    // If there is no winner, we need to check if all cells are occupied
-                    return "All grid cells occupied. Game over!";
-                }
+            if (results) {
+                // game has a winner
+                // console.log(`The winner is ${player}`);
+                // call function to game over state, send player as argument
+                return gameOver(player);
             }
-            
-            console.log(checkWin(results));
 
+            const hasNull = gameState.board.includes(null);
+            if (hasNull) {
+                console.log("There are still moves to make, continue the game.");
+            } else {
+                // console.log("All grid cells occupied. Game over!");
+                // call function to game over state
+                return gameOver(); // rely on parameter default
+            }
 
             //      Then go off to reset game state
             // 4. If no winner, return from function
+            
+
+
         }
 
         // deal with an input from player
@@ -234,6 +235,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const startGame = () => {
 
+        }
+
+        const gameOver = (result = null) => {
+            if (result != null) {
+                console.log(`The winner is ${players[result].marker}`);
+            } else {
+                console.log(`The game has ended in a draw`);
+            }
+            // Code for resetting the game to start anew.
         }
 
         return {
