@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Current Player:', players[currentPlayerIndex].getMarker());
         }
 
-
         function initEvents() {
             const gridCells = document.getElementsByClassName('cell');
 
@@ -187,9 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 2b. Search winningStates and check each of its arrays' array elements against the occupiedCells array elements
             const results = winningStates.find(element => element.every(item => occupiedCells.includes(item)));
-
-            console.log('The winning result is', results);
-
+            !results ? console.log('There are no winning results.') : console.log('The winning result is', results);
 
             // 3. Declare a winner
             function checkWin(win) {
