@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentPlayerIndex = 0;
 
         const init = () => { 
+            
             initGrid(9); // Create or reset the game board 3x3
 
             players.length = 0; // Removes existing players if any
@@ -241,7 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // element is the child -> Array.from(child.parentNode.children).indexOf(child);
                 const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
                 // use elementIndex to reference the game board array
-                console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
+                // console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
+                console.log('You have clicked on the grid cell', elementIndex);
                 // I'm worried that elementIndex and board array indexes aren't coupled here. 
                 // Could it be possible for these to ever get out of sync? Maybe not in this context...
                 element.classList.toggle("test"); // debug, cell filled in when clicked
@@ -265,10 +267,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 
     const game = Game();
+    const render = Render();
 
     // Temporarily expose for debugging
     window.game = game;
 
+    render.initEvents(); // Hook up event listeners
     game.init(); // Start the app
 
     
