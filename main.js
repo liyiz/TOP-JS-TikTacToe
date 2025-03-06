@@ -11,18 +11,20 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // const game = Game();
     const render = Render();
 
     // Temporarily expose for debugging
+    // window.game = game;
     window.render = render;
 
     render.initEvents(); // Hook up event listeners
-    render.game.init(); // Start the app
+    Game.init(); // Start the app
 
 });
 
 // Module/IIFE pattern for scoping
-function Game() {
+const Game = ( function() {
 
     // Private variables/functions
     const board = [];
@@ -245,11 +247,11 @@ function Game() {
         currentPlayerIndex,
         bloop
     };
-}
+})();
 
 function Render() {
 
-    const game = Game();
+    // const game = Game();
 
     function initEvents() {
 
@@ -262,7 +264,7 @@ function Render() {
             const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
             // use elementIndex to reference the game board array
             // console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
-            console.log('You have clicked on the grid cell', elementIndex, 'and its value is', game.getBoard()[elementIndex]);
+            console.log('You have clicked on the grid cell', elementIndex, 'and its value is', Game.getBoard()[elementIndex]);
             // I'm worried that elementIndex and board array indexes aren't coupled here. 
             // Could it be possible for these to ever get out of sync? Maybe not in this context...
             element.classList.toggle("test"); // debug, cell filled in when clicked
@@ -283,6 +285,6 @@ function Render() {
 
     return {
         initEvents,
-        game
+        // game
     }
 }
