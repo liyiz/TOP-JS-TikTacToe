@@ -36,8 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Need eventlistener for placeMarker();
             // initEvents(); // Comment out for now so this can be put into a specific render function
 
-            
-
             // Debug stuff
             console.table(players);
             console.table(board);
@@ -49,33 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function nextPlayer() {
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
             console.log('Current Player:', players[currentPlayerIndex].getMarker());
-        }
-
-        // move this code to another large function handling the "visuals" only
-        function initEvents() {
-            const gridCells = document.getElementsByClassName('cell');
-
-            const handleClick = (e) => {
-                
-                const element = e.target
-                // element is the child -> Array.from(child.parentNode.children).indexOf(child);
-                const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
-                // use elementIndex to reference the game board array
-                console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
-                // I'm worried that elementIndex and board array indexes aren't coupled here. 
-                // Could it be possible for these to ever get out of sync? Maybe not in this context...
-                element.classList.toggle("test"); // debug, cell filled in when clicked
-
-                // Check if grid cell has a player marker or not
-                
-            }
-
-            // .getElementsByClassName returns an array-like object, not an array
-            // Use Array.from to make it compatible with .forEach
-            Array.from(gridCells).forEach((el) => {
-                // Attach click eventlistener to each <div class="cell">
-                el.addEventListener('click', handleClick);
-            });
         }
 
         // Visuals related
@@ -127,12 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 setValue,
                 getValue
             };
-        }
-
-        // Check what cells player one occupies
-        // This can probably go in createPlayer
-        function PlayerState (player) {
-
         }
 
         const checkWinner = (player) => {
@@ -265,6 +230,39 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
   
+    function Render() {
+
+        function initEvents() {
+            const gridCells = document.getElementsByClassName('cell');
+
+            const handleClick = (e) => {
+                
+                const element = e.target
+                // element is the child -> Array.from(child.parentNode.children).indexOf(child);
+                const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
+                // use elementIndex to reference the game board array
+                console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
+                // I'm worried that elementIndex and board array indexes aren't coupled here. 
+                // Could it be possible for these to ever get out of sync? Maybe not in this context...
+                element.classList.toggle("test"); // debug, cell filled in when clicked
+
+                // Check if grid cell has a player marker or not
+                
+            }
+
+            // .getElementsByClassName returns an array-like object, not an array
+            // Use Array.from to make it compatible with .forEach
+            Array.from(gridCells).forEach((el) => {
+                // Attach click eventlistener to each <div class="cell">
+                el.addEventListener('click', handleClick);
+            });
+        }
+
+        return {
+            initEvents
+        }
+    }
+
     // 
     const game = Game();
 
