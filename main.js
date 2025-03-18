@@ -11,14 +11,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // const game = Game();
-    const render = Render();
-
-    // Temporarily expose for debugging
-    // window.game = game;
-    window.render = render;
-
-    render.initEvents(); // Hook up event listeners
+    Render.initEvents(); // Hook up event listeners
     Game.init(); // Start the app
 
 });
@@ -249,7 +242,7 @@ const Game = ( function() {
     };
 })();
 
-function Render() {
+const Render = ( function() {
 
     // const game = Game();
 
@@ -287,4 +280,4 @@ function Render() {
         initEvents,
         // game
     }
-}
+})();
