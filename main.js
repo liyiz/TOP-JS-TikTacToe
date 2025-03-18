@@ -86,6 +86,9 @@ const Game = ( function() {
     function getPlayer(playerIndex) {
         return players[playerIndex];
     }
+    function getCurrentPlayer() {
+        return currentPlayerIndex;
+    }
 
     // Factory function for handling cells for the game board
     function Cell() {
@@ -157,7 +160,7 @@ const Game = ( function() {
             if (item != undefined) return true;
         });
 
-        console.log('Player has markers in:', occupiedCells);
+        console.log(`Player ${pMarker} has markers in cell ${occupiedCells}`);
 
         
         // 2b. Search winningStates and check each of its arrays' array elements against the occupiedCells array elements
@@ -176,6 +179,8 @@ const Game = ( function() {
         const hasNull = gameState.board.includes(null);
         if (hasNull) {
             console.log("There are still moves to make, continue the game.");
+            // switch to next player
+            nextPlayer();
         } else {
             // console.log("All grid cells occupied. Game over!");
             // call function to game over state
@@ -238,6 +243,7 @@ const Game = ( function() {
         players,
         nextPlayer,
         currentPlayerIndex,
+        getCurrentPlayer,
         bloop
     };
 })();
@@ -257,13 +263,12 @@ const Render = ( function() {
             const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
             // use elementIndex to reference the game board array
             // console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
-            console.log('You have clicked on the grid cell', elementIndex, 'and its value is', Game.getBoard()[elementIndex]);
-            // I'm worried that elementIndex and board array indexes aren't coupled here. 
-            // Could it be possible for these to ever get out of sync? Maybe not in this context...
+            
+            Game.placeMarker(Game.getCurrentPlayer(), elementIndex)
             element.classList.toggle("test"); // debug, cell filled in when clicked
 
-            // Check if grid cell has a player marker or not
-
+            // Check if grid cell has a player marker or not 
+            console.log('You have clicked on the grid cell', elementIndex, 'and its value is', Game.getBoard()[elementIndex], Game.getBoard());
 
             
         }
