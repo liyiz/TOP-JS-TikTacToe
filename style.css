@@ -52,3 +52,11 @@ ul {
 .cell.test {
     background-color: var(--color-primary-variant);
 }
+
+.cell.x {
+    background-color: blue;
+}
+
+.cell.o {
+    background-color: red;
+}

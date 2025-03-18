@@ -86,7 +86,7 @@ const Game = ( function() {
     function getPlayer(playerIndex) {
         return players[playerIndex];
     }
-    function getCurrentPlayer() {
+    function getCurrentPlayerIndex() {
         return currentPlayerIndex;
     }
 
@@ -243,7 +243,7 @@ const Game = ( function() {
         players,
         nextPlayer,
         currentPlayerIndex,
-        getCurrentPlayer,
+        getCurrentPlayerIndex,
         bloop
     };
 })();
@@ -258,18 +258,21 @@ const Render = ( function() {
 
         const handleClick = (e) => {
             
+            const currentPlayer = Game.getPlayer(Game.getCurrentPlayerIndex());
+            const currentPlayerMarker = currentPlayer.getMarker();
             const element = e.target
             // element is the child -> Array.from(child.parentNode.children).indexOf(child);
             const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
             // use elementIndex to reference the game board array
             // console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
             
-            Game.placeMarker(Game.getCurrentPlayer(), elementIndex)
-            element.classList.toggle("test"); // debug, cell filled in when clicked
+            Game.placeMarker(Game.getCurrentPlayerIndex(), elementIndex)
+            element.classList.toggle(currentPlayerMarker); // debug, cell filled in when clicked
+
+
 
             // Check if grid cell has a player marker or not 
             console.log('You have clicked on the grid cell', elementIndex, 'and its value is', Game.getBoard()[elementIndex], Game.getBoard());
-
             
         }
 
