@@ -194,6 +194,7 @@ const Game = ( function() {
         // Code for resetting the game to start anew.
         console.log("Game has ended. Waiting for user input to restart.");
         // 1. disable cell click events
+        Render.disableEvents();
         // 2. show "Play Again" button
         // Make sure button triggers game reset functions
         // init(); // reset the game
@@ -233,6 +234,11 @@ const Render = ( function() {
                 el.classList.remove("x", "o");
             }
         });
+        container.classList.remove("disabled");
+    }
+
+    function disableEvents() {
+        container.classList.add("disabled");
     }
 
     function showRestartBtn() {
@@ -273,6 +279,7 @@ const Render = ( function() {
 
     return {
         initEvents,
-        resetGrid
+        resetGrid,
+        disableEvents
     }
 })();

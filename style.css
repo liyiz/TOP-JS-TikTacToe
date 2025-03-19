@@ -73,3 +73,7 @@ main {
 .cell.o {
     background-color: red;
 }
+
+.disabled {
+    pointer-events: none;
+}
