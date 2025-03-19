@@ -35,20 +35,11 @@ const Game = ( function() {
         players.push(CreatePlayer('x')); // will be first player
         players.push(CreatePlayer('o'));
 
-        // Set who is going to play first
-        // No need, first player is already set by first in array
-        // We do have a function to progress player order -> nextPlayer();
-
-        // Wait for input events of current player to select available grid cell
-        // Need eventlistener for placeMarker();
-        // initEvents(); // Comment out for now so this can be put into a specific render function
-
         // Debug stuff
         console.table(players);
         console.table(board);
 
         startGame();
-
     }
 
     function nextPlayer() {
@@ -56,7 +47,6 @@ const Game = ( function() {
         console.log('Current Player:', players[currentPlayerIndex].getMarker());
     }
 
-    // Visuals related
     const initGrid = (gridSize) => {
         // Reset the grid
         for (let i = 0; i < gridSize; i++) {
@@ -67,7 +57,6 @@ const Game = ( function() {
 
     function CreatePlayer(marker) {
 
-        let cells = [];
         const getState = () => {
             // loop through board state and log indexes that match player marker
         }
@@ -89,26 +78,6 @@ const Game = ( function() {
     }
     function getCurrentPlayerIndex() {
         return currentPlayerIndex;
-    }
-
-    // Factory function for handling cells for the game board
-    function Cell() {
-
-        // This variable is not returned, so it is a private variable
-        // It can only be accessed via the public functions returned (addToken and getValue)
-        let value = null;
-        
-        const setValue = (newValue) => {
-            value = newValue;
-        };
-        
-        // How we will retrieve the current value of this cell through closure
-        const getValue = () => value;
-        
-        return {
-            setValue,
-            getValue
-        };
     }
 
     const checkWinner = (player) => {
@@ -166,8 +135,6 @@ const Game = ( function() {
         
         // 2b. Search winningStates and check each of its arrays' array elements against the occupiedCells array elements
         const results = winningStates.find(element => element.every(item => occupiedCells.includes(item)));
-        // !results ? console.log('There are no winning results.') : console.log('The winning result is', results);
-
 
         // 3. Declare a winner
         if (results) {
