@@ -254,6 +254,7 @@ const Render = ( function() {
     const container = document.querySelector('#container');
     const gridCells = document.getElementsByClassName('cell');
     const gridCellsArray = Array.from(gridCells);
+    
     function resetGrid() {
         // create DOM elements for grid
         gridCellsArray.forEach((el) => {
@@ -265,9 +266,11 @@ const Render = ( function() {
         });
     }
 
-    function initEvents() {
-
+    function showRestartBtn() {
         
+    }
+
+    function initEvents() {
 
         const handleClick = (e) => {
             
