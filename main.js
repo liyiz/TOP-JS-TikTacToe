@@ -170,11 +170,15 @@ const Game = ( function() {
         // console.log(cellIndex);
         // assign gridcell with player marker
         // gridcell = player.marker; // wrong way to do it!
-        board.splice(cellIndex, 1, players[player].marker);
+        
+        // Check if cell is empty
+        if (board[cellIndex] === null){
+            board.splice(cellIndex, 1, players[player].marker);
+            Render.setCellVisual(players[player].marker, cellIndex);
+        }
 
         // Check if there is a winner after player made their play
         checkWinner(player);
-
         return getBoard();
         
     }
@@ -234,15 +238,34 @@ const Render = ( function() {
                 el.classList.remove("x", "o");
             }
         });
+
         container.classList.remove("disabled");
+        // container.children is an HTMLCollection, which is not technically an Array.
+        // use Array.from to convert to array.
+        Array.from(container.children).forEach((el) => {el.classList.remove("disabled");});
     }
 
     function disableEvents() {
         container.classList.add("disabled");
     }
 
+    const disableCell = (index) => {
+        container.children[index].classList.add("disabled");
+    }
+
     function showRestartBtn() {
         
+    }
+
+    const setCellVisual = (playerMarker, elementIndex) => {
+        // add or remove class from selected grid cell
+        // I need the element that is currently selected first. But if this is being called from 
+        // Game.placeMarker(), then I need to make sure this function knows what I'm targeting.
+        // playerMarker is the string 'x' or 'o'
+        // elementIndex is the index of the element child of '#container'
+
+        container.children[elementIndex].classList.add(playerMarker);
+
     }
 
     function initEvents() {
@@ -256,8 +279,10 @@ const Render = ( function() {
             const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
             // use elementIndex to reference the game board array
             // console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
-            element.classList.add(currentPlayerMarker); 
-            Game.placeMarker(Game.getCurrentPlayerIndex(), elementIndex)
+
+            // element.classList.add(currentPlayerMarker);
+            Game.placeMarker(Game.getCurrentPlayerIndex(), elementIndex); // setCellVisual called from here too
+            disableCell(elementIndex);
 
             // Check if grid cell has a player marker or not 
             console.log('You have clicked on the grid cell', elementIndex, 'and its value is', Game.getBoard()[elementIndex], Game.getBoard());
@@ -280,6 +305,7 @@ const Render = ( function() {
     return {
         initEvents,
         resetGrid,
-        disableEvents
+        disableEvents,
+        setCellVisual
     }
 })();
