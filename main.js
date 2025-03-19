@@ -192,8 +192,11 @@ const Game = ( function() {
             console.log(`The game has ended in a draw`);
         }
         // Code for resetting the game to start anew.
-        console.log("Add in an input here, but running game reset automatically for now");
-        init(); // reset the game
+        console.log("Game has ended. Waiting for user input to restart.");
+        // 1. disable cell click events
+        // 2. show "Play Again" button
+        // Make sure button triggers game reset functions
+        // init(); // reset the game
     }
 
     const bloop = () => {
@@ -221,6 +224,7 @@ const Render = ( function() {
     const container = document.querySelector('#container');
     const gridCells = document.getElementsByClassName('cell');
     const gridCellsArray = Array.from(gridCells);
+    const resetBtn = document.querySelector('#restart');
     
     function resetGrid() {
         // create DOM elements for grid
@@ -260,6 +264,11 @@ const Render = ( function() {
             // Attach click eventlistener to each <div class="cell">
             el.addEventListener('click', handleClick);
         });
+
+        // attach event to the restart button
+        resetBtn.addEventListener('click', () => {
+            Game.init();
+        })
     }
 
     return {
