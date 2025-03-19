@@ -246,9 +246,8 @@ const Render = ( function() {
             const elementIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
             // use elementIndex to reference the game board array
             // console.log('You have clicked on the grid cell', elementIndex, 'and its value is', board[elementIndex]);
-            
+            element.classList.add(currentPlayerMarker); 
             Game.placeMarker(Game.getCurrentPlayerIndex(), elementIndex)
-            element.classList.toggle(currentPlayerMarker); // debug, cell filled in when clicked
 
             // Check if grid cell has a player marker or not 
             console.log('You have clicked on the grid cell', elementIndex, 'and its value is', Game.getBoard()[elementIndex], Game.getBoard());
