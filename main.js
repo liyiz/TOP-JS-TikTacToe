@@ -258,10 +258,8 @@ const Render = ( function() {
     function resetGrid() {
         // create DOM elements for grid
         gridCellsArray.forEach((el) => {
-            if (el.classList.contains("x")) {
-                el.classList.toggle("x");
-            } else if (el.classList.contains("o")) {
-                el.classList.toggle("o");
+            if (el.classList.contains("x") || el.classList.contains("o")) {
+                el.classList.remove("x", "o");
             }
         });
     }
