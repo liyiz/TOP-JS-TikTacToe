@@ -62,6 +62,7 @@ const Game = ( function() {
         for (let i = 0; i < gridSize; i++) {
             board[i] = null;
         }
+        Render.resetGrid();
     }
 
     function CreatePlayer(marker) {
@@ -250,11 +251,23 @@ const Game = ( function() {
 
 const Render = ( function() {
 
-    // const game = Game();
+    const container = document.querySelector('#container');
+    const gridCells = document.getElementsByClassName('cell');
+    const gridCellsArray = Array.from(gridCells);
+    function resetGrid() {
+        // create DOM elements for grid
+        gridCellsArray.forEach((el) => {
+            if (el.classList.contains("x")) {
+                el.classList.toggle("x");
+            } else if (el.classList.contains("o")) {
+                el.classList.toggle("o");
+            }
+        });
+    }
 
     function initEvents() {
 
-        const gridCells = document.getElementsByClassName('cell');
+        
 
         const handleClick = (e) => {
             
@@ -269,8 +282,6 @@ const Render = ( function() {
             Game.placeMarker(Game.getCurrentPlayerIndex(), elementIndex)
             element.classList.toggle(currentPlayerMarker); // debug, cell filled in when clicked
 
-
-
             // Check if grid cell has a player marker or not 
             console.log('You have clicked on the grid cell', elementIndex, 'and its value is', Game.getBoard()[elementIndex], Game.getBoard());
             
@@ -278,7 +289,7 @@ const Render = ( function() {
 
         // .getElementsByClassName returns an array-like object, not an array
         // Use Array.from to make it compatible with .forEach
-        Array.from(gridCells).forEach((el) => {
+        gridCellsArray.forEach((el) => {
             // Attach click eventlistener to each <div class="cell">
             el.addEventListener('click', handleClick);
         });
@@ -286,6 +297,6 @@ const Render = ( function() {
 
     return {
         initEvents,
-        // game
+        resetGrid
     }
 })();
