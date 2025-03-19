@@ -230,6 +230,9 @@ const Render = ( function() {
     const gridCells = document.getElementsByClassName('cell');
     const gridCellsArray = Array.from(gridCells);
     const resetBtn = document.querySelector('#restart');
+
+    const icon_x = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>'
+    const icon_o = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle"><circle cx="12" cy="12" r="7"/></svg>'
     
     function resetGrid() {
         // create DOM elements for grid
@@ -242,7 +245,10 @@ const Render = ( function() {
         container.classList.remove("disabled");
         // container.children is an HTMLCollection, which is not technically an Array.
         // use Array.from to convert to array.
-        Array.from(container.children).forEach((el) => {el.classList.remove("disabled");});
+        Array.from(container.children).forEach((el) => {
+            el.classList.remove("disabled");
+            el.innerHTML = '';
+        });
     }
 
     function disableEvents() {
@@ -265,6 +271,17 @@ const Render = ( function() {
         // elementIndex is the index of the element child of '#container'
 
         container.children[elementIndex].classList.add(playerMarker);
+
+        let icon = document.createElement('div');
+        icon.classList.add('icon');
+        if (playerMarker === 'x') {
+            icon.innerHTML += icon_x;
+            container.children[elementIndex].appendChild(icon);
+        }
+        if (playerMarker === 'o') {
+            icon.innerHTML += icon_o;
+            container.children[elementIndex].appendChild(icon);
+        }
 
     }
 
