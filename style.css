@@ -44,6 +44,12 @@ main {
     justify-content: center;
 }
 
+#message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #container {
     width: 100%;
     height: auto;

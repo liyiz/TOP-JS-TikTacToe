@@ -192,9 +192,13 @@ const Game = ( function() {
     const gameOver = (result = null) => {
         if (result != null) {
             console.log(`The winner is ${players[result].marker}`);
+            Render.processMessage(players[result].marker);
         } else {
             console.log(`The game has ended in a draw`);
+            Render.processMessage();
         }
+
+        
         // Code for resetting the game to start anew.
         console.log("Game has ended. Waiting for user input to restart.");
         // 1. disable cell click events
@@ -230,6 +234,8 @@ const Render = ( function() {
     const gridCells = document.getElementsByClassName('cell');
     const gridCellsArray = Array.from(gridCells);
     const resetBtn = document.querySelector('#restart');
+    const messageBox = document.querySelector('#message');
+
 
     const icon_x = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>'
     const icon_o = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle"><circle cx="12" cy="12" r="7"/></svg>'
@@ -249,6 +255,9 @@ const Render = ( function() {
             el.classList.remove("disabled");
             el.innerHTML = '';
         });
+
+        messageBox.innerHTML = icon_x + ' vs. ' + icon_o;
+
     }
 
     function disableEvents() {
@@ -257,6 +266,25 @@ const Render = ( function() {
 
     const disableCell = (index) => {
         container.children[index].classList.add("disabled");
+    }
+
+    const processMessage = (winner = '') => {
+        let message = '';
+
+        if (winner === 'x') {
+            message = icon_x + ' is the winner!';
+        } else if (winner === 'o') {
+            message = icon_o + ' is the winner!';
+        } else {
+            message = 'Game is a tie!';
+        }
+
+        showMessage(message);
+    }
+
+    const showMessage = (message) => {
+        // function to update the message to announce winner etc.
+        return messageBox.innerHTML = message;
     }
 
     function showRestartBtn() {
@@ -323,6 +351,8 @@ const Render = ( function() {
         initEvents,
         resetGrid,
         disableEvents,
-        setCellVisual
+        setCellVisual,
+        showMessage,
+        processMessage
     }
 })();
