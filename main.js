@@ -234,14 +234,14 @@ const Render = ( function() {
     const messageBox = document.querySelector('#message');
     const modalBox = document.querySelector('#dialog')
     const btnStartGame = document.querySelector('#startGame');
+    const btnFormDetails = document.querySelector('#getDetails');
+    const btnFormCancel = document.querySelector('#cancel');
 
 
     const icon_x = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>'
     const icon_o = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle"><circle cx="12" cy="12" r="7"/></svg>'
     
-    const showDialog = () => {
-        modalBox.showModal();
-    }
+
 
     function resetGrid() {
         // create DOM elements for grid
@@ -293,6 +293,24 @@ const Render = ( function() {
     function showRestartBtn() {
         
     }
+
+    const showDialog = () => {
+        modalBox.showModal();
+        console.log("modal now visible!");
+    }
+
+    const cancelDialog = () => {
+        // reset any forms and close the dialog/modal
+        modalBox.close();
+    }
+
+    const handleFormDetails = () => {
+        // take info from modal forms and input to correct elements to display player names.
+        console.log("handling the form details!");
+    }
+
+    
+
 
     const setCellVisual = (playerMarker, elementIndex) => {
         // add or remove class from selected grid cell
@@ -349,9 +367,9 @@ const Render = ( function() {
             Game.init();
         })
 
-        btnStartGame.addEventListener('click', () => {
-            showDialog();
-        });
+        btnStartGame.addEventListener('click', showDialog);
+        btnFormDetails.addEventListener('click', handleFormDetails);
+        btnFormCancel.addEventListener('click', cancelDialog);
     }
 
     return {
