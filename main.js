@@ -232,11 +232,17 @@ const Render = ( function() {
     const gridCellsArray = Array.from(gridCells);
     const resetBtn = document.querySelector('#restart');
     const messageBox = document.querySelector('#message');
+    const modalBox = document.querySelector('#dialog')
+    const btnStartGame = document.querySelector('#startGame');
 
 
     const icon_x = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>'
     const icon_o = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle"><circle cx="12" cy="12" r="7"/></svg>'
     
+    const showDialog = () => {
+        modalBox.showModal();
+    }
+
     function resetGrid() {
         // create DOM elements for grid
         gridCellsArray.forEach((el) => {
@@ -253,7 +259,7 @@ const Render = ( function() {
             el.innerHTML = '';
         });
 
-        messageBox.innerHTML = icon_x + ' vs. ' + icon_o;
+        // messageBox.innerHTML = icon_x + ' vs. ' + icon_o;
 
     }
 
@@ -342,6 +348,10 @@ const Render = ( function() {
         resetBtn.addEventListener('click', () => {
             Game.init();
         })
+
+        btnStartGame.addEventListener('click', () => {
+            showDialog();
+        });
     }
 
     return {

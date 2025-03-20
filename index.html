@@ -9,7 +9,6 @@
 </head>
 <body>
     <main>
-        <div id="message"></div>
         <div id="container">
             <div class="cell"></div>
             <div class="cell"></div>
@@ -22,6 +21,30 @@
             <div class="cell"></div>
         </div>
         <button id="restart">Reset</button>
+
+        <button id="startGame">Start Game</button>
+
+        <dialog class="modal" id="dialog">
+            <form method="dialog">
+                <div class="team x">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    <div class="form-field">
+                        <input id="player_x" name="player_x" type="text" placeholder="Player One"/>
+                    </div>
+                </div>
+                <div class="team o">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle"><circle cx="12" cy="12" r="7"/></svg>
+                    <div class="form-field">
+                        <input id="player_o" name="player_o" type="text" placeholder="Player Two"/>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="getDetails" type="submit">Save</button>
+                    <button id="cancel" type="reset">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+
     </main>
 </body>
 </html>

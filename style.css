@@ -45,6 +45,45 @@ main {
 }
 
 #message {
+    position: fixed;
+    bottom: 0;
+
+    width: 100%;
+    max-width: 720px;
+    padding: 4rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+#message .title {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    justify-self: start;
+}
+
+#message .team {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    grid-row: 2 / 3;
+}
+
+#message .team.x {
+    grid-column: 1 / 2;
+}
+
+#message .team.o {
+    grid-column: 2 / 3;
+}
+
+#message .buttons {
+    grid-column: 1 / 3;
+
     display: flex;
     align-items: center;
     justify-content: center;
