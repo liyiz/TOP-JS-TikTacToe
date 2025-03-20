@@ -1,7 +1,4 @@
-// Check the state of the board
-// Check whose turn it is (is it 'X' or 'O'?)
-// Check if there is a winner
-// Wait for input from current player (Select a cell)
+// TODO: Add in player name input
 
 // Representation of 3x3 grid in a one dimensional array
 // This will help identify winning patterns
