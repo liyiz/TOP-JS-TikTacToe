@@ -32,6 +32,9 @@ const Game = ( function() {
         players.push(CreatePlayer('x')); // will be first player
         players.push(CreatePlayer('o'));
 
+        // Reset scoreboard visuals
+        Render.resetDisplayPlayers();
+
         // Debug stuff
         console.table(players);
         console.table(board);
@@ -307,9 +310,53 @@ const Render = ( function() {
     const handleFormDetails = () => {
         // take info from modal forms and input to correct elements to display player names.
         console.log("handling the form details!");
+        const player_x_form = document.querySelector('#player_x');
+        const player_o_form = document.querySelector('#player_o');
+        const player_x_name = player_x_form.value;
+        const player_o_name = player_o_form.value;
+
+        // If there are more players, I'd have to push names into an array, but as two arguments is fine for now
+        displayPlayers(player_x_name, player_o_name);
+
+        // reset form input fields
+        player_x_form.value = '';
+        player_o_form.value = '';
+
     }
 
-    
+    const displayPlayers = (player_x, player_o) => {
+
+        // Fallback if no input value found (form will always be empty string, so can't use function parameter default)
+        if (player_x === '') {
+            player_x = 'Player X';
+        }
+        if (player_o === '') {
+            player_o = 'Player O';
+        }
+
+        const playerLabelX = document.querySelector('#scoreboard .label.player1');
+        const playerLabelO = document.querySelector('#scoreboard .label.player2');
+
+        const playerTextX = document.createElement('p');
+        playerTextX.classList.add('player', 'x');
+        playerTextX.innerText = player_x;
+
+        const playerTextO = document.createElement('p');
+        playerTextO.classList.add('player', 'o');
+        playerTextO.innerText = player_o;
+
+        playerLabelX.innerHTML = icon_x + playerTextX.innerHTML;
+        playerLabelO.innerHTML = icon_o + playerTextO.innerHTML;
+        
+    }
+
+    const resetDisplayPlayers = () => {
+        const playerLabelX = document.querySelector('#scoreboard .label.player1');
+        const playerLabelO = document.querySelector('#scoreboard .label.player2');
+
+        playerLabelX.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><p class="player x">Player x</p>';
+        playerLabelO.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle"><circle cx="12" cy="12" r="7"/></svg><p class="player o">Player o</p>'
+    }
 
 
     const setCellVisual = (playerMarker, elementIndex) => {
@@ -378,6 +425,7 @@ const Render = ( function() {
         disableEvents,
         setCellVisual,
         showMessage,
-        processMessage
+        processMessage,
+        resetDisplayPlayers
     }
 })();
